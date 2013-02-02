@@ -46,3 +46,8 @@ class History(models.Model):
     turn_by = models.ForeignKey(Player)
     turn_number = models.IntegerField()
     description = models.TextField()
+    
+    @property
+    def summary(self):
+        return self.description[0:40]
+    

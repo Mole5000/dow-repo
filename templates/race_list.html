@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<h1>The Races of the World</h1>
+		<p>
+			{% if race_list %}
+			    <ul>
+			    {% for history in race_list %}
+			        <li>{{ race.name }}</li>
+			    {% endfor %}
+			    </ul>
+			{% else %}
+				    <p>No races created</p>
+			{% endif %}
+		</p>
+	</body>
+</html>

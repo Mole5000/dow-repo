@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<h1>Hi There cowboy</h1>
+		<p>
+			{% if latest_history_list %}
+			    <ul>
+			    {% for history in latest_history_list %}
+			        <li><a href="history/{{history.id}}" >{{ history.summary }}...</a></li>
+			    {% endfor %}
+			    </ul>
+			{% else %}
+				    <p>No polls are available.</p>
+			{% endif %}
+		</p>
+	</body>
+</html>

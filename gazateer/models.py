@@ -1,5 +1,5 @@
 from django.db import models
-
+import markdown
 
 # Create your models here.
 
@@ -10,6 +10,9 @@ class CommonInfo(models.Model):
     
     class Meta:
         abstract = True
+        
+    def wiki_name(self):        
+        return "The"+self.name.replace(" ","")
     
 class Player(models.Model):
     name =  models.CharField(max_length=50)
@@ -50,4 +53,8 @@ class History(models.Model):
     @property
     def summary(self):
         return self.description[0:40]
+    
+    @property
+    def html_version(self):
+        return markdown.markdown(self.description)
     

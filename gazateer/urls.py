@@ -14,4 +14,8 @@ urlpatterns = patterns('',
             model=History,
             template_name='history_detail.html'),
         name='detail'),
+    url(r'^history/test$', 'gazateer.views.list_of_things',
+        name='test'),
+    url(r'^crap$', 'gazateer.views.crap',
+        name='crap'),
 )

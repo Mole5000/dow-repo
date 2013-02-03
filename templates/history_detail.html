@@ -1,16 +1,70 @@
-<body>
+<body onload="doStuff()">
 	<head>
-	<title>History Detail</title>	
+	<title>History Detail</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/liststuff.css" />
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/generic.css" />
+	<script type="text/javascript" 
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}js/list.js"></script>
+	<script type="text/javascript">
+		var edit_stuff = '<form>/<textarea style="width: 600px; height: 100%"></textarea></form>';
+	
+		function doStuff()
+		{
+			jQuery.ajax("test",{'success':onSuccess,'error':onError});
+			var cb = document.getElementById('content-body');
+			cb.innerHTML = '{{history.html_version|safe}}';
+		}
+		
+		function onSuccess(data, textStatus, jqXHR)
+		{
+			var options = {
+			    item: '<li><a class="name" href="#"></a></li>'
+			};
+			var hackerList = new List('hacker-list', options, data);
+		}
+		
+		function onError( jqXHR,textStatus, errorThrown)
+		{
+			alert(errorThrown);
+		}
+		
+		function doEdit()
+		{
+			var cb = document.getElementById('content-body');
+			cb.innerHTML = '<form><textarea id="text-input">{{history.description}}</textarea></form>';
+			var ec = document.getElementById('edit-control');
+			ec.innerHTML = '<a href="#" onclick="doSave()">Save</a>'
+		}
+	</script>	
 	</head>
 	<h1>History Detail</h1>
 	<p>Turn: {{history.turn_number}}</p>
-	<p>Turn By: {{history.turn_by.name}}</p>
+	<p>Turn By: {{history.turn_by.name}} <span id="edit-control"><a href="#" onclick="doEdit()">Edit</a></span></p>
 	<div>
-		<div style="float:left; background-color: #ff0000; height: 50px; width: 600px; ">
-			<p>Hello</p>
+		<div style="float:left; background-color: #ff0000; width: 600px; ">
+			<div id="content-body">
+				
+			</div>
+			
 		</div>
-		<div style="float:left; background-color: #00ff00; height: 50px; width: 200px">
-			<p>Sailor</p>
+		<div  style="float:left; background-color: #00ff00; height: 400px; width: 200px" >
+			<div id="hacker-list" >
+				<h2>Things List</h2>
+				<input class="search" />
+				<ul class="list" style="border:2px solid #ccc; width:*; height: 300; overflow-y: scroll;"></ul>
+			</div>
+		
 		</div>
 	</div>
+	<div>
+	<script type="text/javascript">
+
+	    /*
+	    * LOVELY THINGS
+	    */
+	
+
+	</script>
+    </div>
 </body>

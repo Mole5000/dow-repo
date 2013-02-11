@@ -11,9 +11,7 @@
 	
 		function doStuff()
 		{
-			jQuery.ajax("test",{'success':onSuccess,'error':onError});
-			var cb = document.getElementById('content-body');
-			cb.innerHTML = '{{history.html_version|safe}}';
+			jQuery.ajax("../test",{'success':onSuccess,'error':onError});
 		}
 		
 		function onSuccess(data, textStatus, jqXHR)
@@ -32,9 +30,15 @@
 		function doEdit()
 		{
 			var cb = document.getElementById('content-body');
-			cb.innerHTML = '<form><textarea id="text-input">{{history.description}}</textarea></form>';
+			cb.innerHTML = '<form id="editable_history" action="save" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" /> <textarea id="text-input" name="text_input">{{history.description}}</textarea></form>';
 			var ec = document.getElementById('edit-control');
 			ec.innerHTML = '<a href="#" onclick="doSave()">Save</a>'
+		}
+		
+		function doSave()
+		{
+			var eh = document.getElementById('editable_history');
+			eh.submit();
 		}
 	</script>	
 	</head>
@@ -44,7 +48,7 @@
 	<div>
 		<div style="float:left; background-color: #ff0000; width: 600px; ">
 			<div id="content-body">
-				
+				{{history.html_version|safe}}
 			</div>
 			
 		</div>

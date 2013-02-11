@@ -10,10 +10,12 @@ urlpatterns = patterns('',
             context_object_name='latest_history_list',
             template_name='history_list.html'),
         name='index'),
-    url(r'^history/(?P<pk>\d+)$', DetailView.as_view(
+    url(r'^history/(?P<pk>\d+)/$', DetailView.as_view(
             model=History,
             template_name='history_detail.html'),
         name='detail'),
+    url(r'^history/(?P<pk>\d+)/save$', 'gazateer.views.save_history',
+        name='test'),                       
     url(r'^history/test$', 'gazateer.views.list_of_things',
         name='test'),
     url(r'^crap$', 'gazateer.views.crap',

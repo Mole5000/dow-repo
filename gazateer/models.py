@@ -56,5 +56,6 @@ class History(models.Model):
     
     @property
     def html_version(self):
-        return markdown.markdown(self.description)
+        text = markdown.markdown(self.description)
+        return text
     
